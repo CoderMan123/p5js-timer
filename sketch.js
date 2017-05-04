@@ -2,11 +2,41 @@ var timeleft = 10;
 var ding;
 var interval = false;
 
-// Convert seconds to min:sec
-function convertSeconds(s) {
-	var min = floor(s / 60);
-	var sec = s % 60;
+  var min = floor(s / 60);
+  var sec = s % 60;
+  var hour = floor(min / 60);
+  var minute = min % 60
+	min = minute
+  var day = floor(hour / 24)
+  var hourer = hour % 24
+	hour = hourer
+  var week = floor(day / 7)
+  var dayer = day % 7
+	day = dayer
+  if(timeleft - currentTime > 604799) {
+	return nf(week, 2) + ':' + nf(day, 2) + ':' + nf(hour, 2) + ':' + nf(min, 2) + ':' + nf(sec, 2);
+  }
+  else if(timeleft - currentTime > 86399) {
+	return nf(day, 2) + ':' + nf(hour, 2) + ':' + nf(min, 2) + ':' + nf(sec, 2);
+  }
+  else if(timeleft - currentTime > 3599) {
+	return nf(hour, 2) + ':' + nf(min, 2) + ':' + nf(sec, 2);
+  }
+  else {
 	return nf(min, 2) + ':' + nf(sec, 2);
+  }
+  if(timeleft - currentTime > 604799 && checked==true) {
+	return nf(week, 2) + 'w ' + nf(day, 2) + 'd ' + nf(hour, 2) + 'h ' + nf(min, 2) + 'm ' + nf(sec, 2) + 's';
+  }
+  else if(timeleft - currentTime > 86399 && checked==true) {
+	return nf(day, 2) + 'd ' + nf(hour, 2) + 'h ' + nf(min, 2) + 'm ' + nf(sec, 2) + 's';
+  }
+  else if(timeleft - currentTime > 3599 && checked==true) {
+	return nf(hour, 2) + 'h ' + nf(min, 2) + 'm ' + nf(sec, 2) + 's';
+  }
+  else if(checked==true) {
+	return nf(min, 2) + 'm ' + nf(sec, 2) + 's';
+  }
 }
 
 function preload() {
